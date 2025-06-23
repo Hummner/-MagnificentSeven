@@ -21,4 +21,8 @@ export default {
 h1 {
   color: white;
 }
+
+li {
+    color: white;
+}
 </style>
