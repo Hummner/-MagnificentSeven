@@ -16,9 +16,16 @@ export default {
     background-color: #011F35;
     border-radius: 16px;
     padding: 24px 32px;
+    display: flex;
+    gap: 24px;
+    
 }
 
-h1 {
+p {
+    color: white;
+}
+
+h2 {
   color: white;
 }
 
