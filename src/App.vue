@@ -1,16 +1,17 @@
 <template>
   <BaseCard>
-    <h2>Daten aus "$AAPL"</h2>
-    <ul>
-      <li v-for="(item, index) in data" :key="index">
-        {{ item['Mar 21'] || '–' }}
-      </li>
-    </ul>
+
+  
+    <div v-for="(item, index) in 7" :key="quarter[index]">
+      <BaseCard>
+      {{ data[data.length - 1] }} {{ quarter[data.length - 1] }}
+    </BaseCard>
+      
+    </div>
+
   </BaseCard>
 
-  <BaseCard>
 
-  </BaseCard>
 </template>
 
 <script>
@@ -25,11 +26,13 @@ export default {
   data() {
     console.log('[data()] läuft...');
     return {
-      data: []
+      data: [],
+      quarter: []
     };
   },
   async created() {
-    this.data = await stockService.fetchData('%24AAPL');
+    this.data = await stockService.getRevenue('%24AAPL');
+    this.quarter = await stockService.getQuarter('%24AAPL');
     console.log('Geladene Daten:', this.data);
   }
 };
