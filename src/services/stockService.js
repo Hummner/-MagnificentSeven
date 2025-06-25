@@ -1,3 +1,4 @@
+import { dummyData } from '@/data/dummyData';
 import axios from 'axios';
 
 const order = [
@@ -23,10 +24,13 @@ const order = [
 
 
 class StockService {
+  useAPI;
   constructor() {
     this.apiClient = axios.create({
       baseURL: 'https://sheetdb.io/api/v1/uzby68z9k216s'
     });
+
+    this.useAPI = false;
   }
 
   async fetchData(sheetName) {
@@ -44,15 +48,22 @@ class StockService {
     const companies = [{
       name: "Apple",
       sheetName: "%24AAPL",
-      rows : [1, 7, 21, 34]
+      rows: [1, 7, 21, 34]
     }];
 
-    for (const name of companies) {
-      let companyData = await this.laodData('%24AAPL');
-      companyData.name = name;
+    if (this.useAPI) {
+      for (const name of companies) {
+        let companyData = await this.laodData('%24AAPL');
+        companyData.name = name;
 
-      data.push(companyData);
+        data.push(companyData);
+      }
+
+    } else {
+      data = dummyData;
     }
+
+
 
     return data;
   }
