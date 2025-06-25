@@ -2,10 +2,8 @@
   <BaseCard class="basecard-upside">
 
   
-    <div class="basecard-upside" v-for="(item, index) in 7" :key="quarter[index]">
+    <div class="basecard-upside"  v-for="(item, index) in 1" :key="quarter[index]"  >
       <SmallCard class="small-card">
-        <H2 class="name">Apple</H2><img src="" alt="Logo">
-      <p>{{ data[data.length - 1] }} {{ quarter[data.length - 1] }}</p>
     </SmallCard>
       
     </div>
@@ -17,7 +15,6 @@
 
 <script>
 import BaseCard from './components/BaseCard.vue';
-import { stockService } from './services/stockService.js';
 import SmallCard from  './components/SmallCard.vue';
 
 export default {
@@ -27,17 +24,10 @@ export default {
     SmallCard
   },
   data() {
-    console.log('[data()] läuft...');
     return {
-      data: [],
       quarter: []
     };
   },
-  async created() {
-    this.data = await stockService.getRevenue('%24AAPL');
-    this.quarter = await stockService.getQuarter('%24AAPL');
-    console.log('Geladene Daten:', this.data);
-  }
 };
 </script>
 
