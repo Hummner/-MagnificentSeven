@@ -1,8 +1,8 @@
 <template>
     <div class="card" v-if="dataAll[0]">
-        
+
         <div class="card-header">
-            <img src="@/assets/img/apple.png" alt="">
+            <img :src="getImageUrl()" alt="">
             <h2>{{ dataAll[0].name }}
             </h2>
 
@@ -11,11 +11,11 @@
         <div class="reveneu">
             <span>{{ dataAll[0].revenue[16] }}</span>
             <div class="growth">
-                <span>+1.06</span>
-                <span>2.67%</span>
+                <span>{{ getLastGrowth() }}</span>
+                <span>{{ getLastGrowthPercent() }}</span>
             </div>
         </div>
-        <p>In Bill USD</p>
+        <p class="in-bill">In Bill USD</p>
     </div>
 
 </template>
@@ -27,7 +27,7 @@ export default {
     name: 'SmallCard',
     data() {
         return {
-            dataAll : [],
+            dataAll: [],
         }
     },
     async created() {
@@ -35,6 +35,29 @@ export default {
         console.log("Das ist das array: ", this.dataAll);
 
 
+    },
+    methods: {
+        getLastGrowth() {
+            let numberA = this.dataAll[0].revenue[16];
+            let numberB = this.dataAll[0].revenue[15];
+            numberA = Number(numberA.replace(',', '.'));
+            numberB = Number(numberB.replace(',', '.'));
+            return (numberA - numberB).toFixed(2)
+        },
+        getLastGrowthPercent() {
+            let numberA = this.dataAll[0].revenue[16];
+            let numberB = this.dataAll[0].revenue[15];
+            numberA = Number(numberA.replace(',', '.'));
+            numberB = Number(numberB.replace(',', '.'));
+            let different = numberA - numberB;
+            let percent = ((different / numberB) * 100).toFixed(2);
+            return percent + " %";
+        },
+        getImageUrl() {
+            const fileName = this.dataAll[0].name.toLowerCase();
+            return require(`@/assets/img/${fileName}.png`);
+
+        }
     }
 }
 
@@ -48,23 +71,43 @@ export default {
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    padding: 24px;
+    padding: 20px 24px;
+    width: 173px;
+    height: 143px;
+    gap: 16px;
 }
 
 .card-header {
     display: flex;
+    align-items: center;
 }
+
+.card-header img {
+    object-fit: contain;
+    height: 20px;
+    width: 20px;
+    margin-right: 12px;
+}
+
 
 .reveneu {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 50px;
-    font-size: 21px;
+    gap: 8px;
+
+
+}
+
+.reveneu span {
+    font-size: 24px;
 }
 
 .growth {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .growth span {
@@ -81,5 +124,10 @@ span {
 
 p {
     color: white;
+    font-size: 21px;
+}
+
+.in-bill {
+    font-size: 14px;
 }
 </style>

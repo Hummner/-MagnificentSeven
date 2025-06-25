@@ -41,11 +41,16 @@ class StockService {
 
   async renderData() {
     let data = [];
-    const companies = ["Apple"];
+    const companies = [{
+      name: "Apple",
+      sheetName: "%24AAPL",
+      rows : [1, 7, 21, 34]
+    }];
 
     for (const name of companies) {
       let companyData = await this.laodData('%24AAPL');
       companyData.name = name;
+
       data.push(companyData);
     }
 
@@ -55,7 +60,7 @@ class StockService {
 
   async laodData(sheetName) {
     const data = await this.fetchData(sheetName);
-    const revenue = order.map(key => data[3][key]);
+    const revenue = order.map(key => data[7][key]);
     const quarter = order.map(key => data[1][key]);
     const incomeNetto = order.map(key => data[34][key]);
     const grossMargin = order.map(key => data[21][key]);

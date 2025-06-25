@@ -32,8 +32,14 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: 'rubik';
+  src: url(/src/assets/fonts/rubik-regular.ttf);
+}
+
 * {
   margin: 0;
+  font-family: rubik;
 }
 
 body {
