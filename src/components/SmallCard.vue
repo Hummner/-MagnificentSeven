@@ -11,8 +11,10 @@
         <div class="reveneu">
             <span>{{ dataAll[index].revenue[16].replace(",", ".") }}</span>
             <div class="growth">
-                <span :class="getLastGrowth(index) > 0 ? 'growth-green' : 'growth-red'">{{ getLastGrowth(index) }}</span>
-                <span>{{ getLastGrowthPercent(index) }}</span>
+                <span :class="getLastGrowth(index) > 0 ? ['growth-green', 'arrow-green'] : ['growth-red', 'arrow-red']"
+                    class="padding10">{{ getLastGrowth(index) }}</span>
+                <span :class="getLastGrowth(index) > 0 ? 'growth-green' : 'growth-red'">{{
+                    getLastGrowthPercent(index) }}</span>
             </div>
         </div>
         <p class="in-bill">In Bill USD</p>
@@ -87,12 +89,42 @@ export default {
     align-items: center;
 }
 
+.padding10 {
+    padding-right: 15px;
+}
+
 .growth-green {
     color: green;
+    position: relative;
+}
+
+.arrow-green::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: url(/src/assets/img/arrow_upward_alt.svg);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: 5px;
+    right: 0;
+}
+
+.arrow-red::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: url(/src/assets/img/arrow_downward_alt.svg);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: 5px;
+    right: 0;
 }
 
 .growth-red {
     color: red;
+    position: relative;
 }
 
 .card-header img {
@@ -120,7 +152,7 @@ export default {
 .growth {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .growth span {

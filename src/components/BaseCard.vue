@@ -1,4 +1,5 @@
-<template>Add commentMore actions
+<template>
+    <h1>The Magnificent Seven Companies</h1>
     <div class="card">
         <!-- Slot für beliebigen Inhalt -->
         <slot></slot>
@@ -19,6 +20,10 @@ export default {
     display: flex;
     gap: 24px;
     
+}
+
+h1 {
+    color: white;
 }
 
 p {
