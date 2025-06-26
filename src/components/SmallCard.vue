@@ -1,18 +1,18 @@
 <template>
-    <div class="card" v-if="dataAll[0]">
+    <div class="card" v-if="dataAll[index]">
 
         <div class="card-header">
             <img :src="getImageUrl()" alt="">
-            <h2>{{ dataAll[0].name }}
+            <h2>{{ dataAll[index].name }}
             </h2>
 
         </div>
-        <p>Revenue {{ dataAll[0].quarter[16] }}</p>
+        <p>Revenue {{ dataAll[index].quarter[16] }}</p>
         <div class="reveneu">
-            <span>{{ dataAll[0].revenue[16] }}</span>
+            <span>{{ dataAll[index].revenue[16].replace(",", ".") }}</span>
             <div class="growth">
-                <span>{{ getLastGrowth() }}</span>
-                <span>{{ getLastGrowthPercent() }}</span>
+                <span :class="getLastGrowth(index) > 0 ? 'growth-green' : 'growth-red'">{{ getLastGrowth(index) }}</span>
+                <span>{{ getLastGrowthPercent(index) }}</span>
             </div>
         </div>
         <p class="in-bill">In Bill USD</p>
@@ -25,6 +25,11 @@ import { stockService } from '@/services/stockService';
 
 export default {
     name: 'SmallCard',
+    props: {
+        index: {
+            type: Number
+        }
+    },
     data() {
         return {
             dataAll: [],
@@ -37,16 +42,16 @@ export default {
 
     },
     methods: {
-        getLastGrowth() {
-            let numberA = this.dataAll[0].revenue[16];
-            let numberB = this.dataAll[0].revenue[15];
+        getLastGrowth(index) {
+            let numberA = this.dataAll[index].revenue[16];
+            let numberB = this.dataAll[index].revenue[15];
             numberA = Number(numberA.replace(',', '.'));
             numberB = Number(numberB.replace(',', '.'));
             return (numberA - numberB).toFixed(2)
         },
-        getLastGrowthPercent() {
-            let numberA = this.dataAll[0].revenue[16];
-            let numberB = this.dataAll[0].revenue[15];
+        getLastGrowthPercent(index) {
+            let numberA = this.dataAll[index].revenue[16];
+            let numberB = this.dataAll[index].revenue[15];
             numberA = Number(numberA.replace(',', '.'));
             numberB = Number(numberB.replace(',', '.'));
             let different = numberA - numberB;
@@ -80,6 +85,14 @@ export default {
 .card-header {
     display: flex;
     align-items: center;
+}
+
+.growth-green {
+    color: green;
+}
+
+.growth-red {
+    color: red;
 }
 
 .card-header img {

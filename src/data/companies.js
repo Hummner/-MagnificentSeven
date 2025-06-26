@@ -10,7 +10,7 @@ export const companies = [
     rows: [1, 7, 21, 34]
   },
   {
-    name: "Google",
+    name: "Alphabet",
     sheetName: "%24GOOG",
     rows: [1, 7, 21, 34]
   }

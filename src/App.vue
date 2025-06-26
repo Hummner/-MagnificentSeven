@@ -2,8 +2,8 @@
   <BaseCard class="basecard-upside">
 
   
-    <div class="basecard-upside"  v-for="(item, index) in 1" :key="quarter[index]"  >
-      <SmallCard class="small-card">
+    <div class="basecard-upside"  v-for="(item, index) in 7" :key="quarter[index]"  >
+      <SmallCard :index="index" class="small-card">
     </SmallCard>
       
     </div>
@@ -53,9 +53,7 @@ li {
   color:white;
 }
 
-.small-card {
 
-}
 
 .basecard-upside {
 padding: 24px;
