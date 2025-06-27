@@ -1,5 +1,4 @@
 <template>
-    <h1>The Magnificent Seven Companies</h1>
     <div class="card">
         <!-- Slot für beliebigen Inhalt -->
         <slot></slot>
@@ -19,12 +18,11 @@ export default {
     padding: 24px 32px;
     display: flex;
     gap: 24px;
+    width: fit-content;
     
 }
 
-h1 {
-    color: white;
-}
+
 
 p {
     color: white;

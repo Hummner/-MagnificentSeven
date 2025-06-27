@@ -1,27 +1,57 @@
 <template>
-  <BaseCard class="basecard-upside">
+  <header>
+    <div class="placeholder"></div>
+    <h1>The Magnificent Seven Companies</h1>
+  </header>
+  <main>
 
-  
-    <div class="basecard-upside"  v-for="(item, index) in 7" :key="quarter[index]"  >
-      <SmallCard :index="index" class="small-card">
-    </SmallCard>
-      
+    <BaseCard class="basecard-upside">
+
+
+      <div class="basecard-upside" v-for="(item, index) in 7" :key="quarter[index]">
+        <SmallCard :index="index" class="small-card">
+        </SmallCard>
+
+      </div>
+
+    </BaseCard>
+
+    <div class="middle-diagramms">
+
+      <BaseCard class="line-chart">
+        <LineCharts>
+
+        </LineCharts>
+      </BaseCard>
+
+      <BaseCard>
+        <Doughnut>
+
+        </Doughnut>
+      </BaseCard>
     </div>
 
-  </BaseCard>
+
+  </main>
+
 
 
 </template>
 
 <script>
 import BaseCard from './components/BaseCard.vue';
-import SmallCard from  './components/SmallCard.vue';
+import SmallCard from './components/SmallCard.vue';
+import LineCharts from './components/LineCharts.vue';
+import Doughnut from './components/Doughnut.vue';
+
 
 export default {
   name: 'App',
   components: {
     BaseCard,
-    SmallCard
+    SmallCard,
+    LineCharts,
+    Doughnut
   },
   data() {
     return {
@@ -46,21 +76,53 @@ body {
   background: radial-gradient(71.11% 100% at 50% 0%, #020204 14.6%, #011F35 100%);
   width: 100vw;
   min-height: 100vh;
-  padding: 24px;
+
+}
+
+.middle-diagramms {
+  display: flex;
+  align-items: center;
+
 }
 
 li {
-  color:white;
+  color: white;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-top: 32px;
+}
+
+main {
+  padding: 96px;
+}
+
+.placeholder {
+  background-color: #39DAFF;
+  width: 96px;
+  border-radius: 0 50px 50px 0;
+  height: 32px;
+}
+
+.line-chart {
+  width: 500px;
+}
+
+h1 {
+  color: white;
 }
 
 
 
 .basecard-upside {
-padding: 24px;
+  padding: 24px;
 }
 
 p {
-    color: white;
+  color: white;
 }
 
 h2 {

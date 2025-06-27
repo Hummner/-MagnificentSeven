@@ -39,7 +39,6 @@ export default {
     },
     async created() {
         this.dataAll = await stockService.renderData();
-        console.log("Das ist das array: ", this.dataAll);
 
 
     },
