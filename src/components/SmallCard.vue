@@ -9,7 +9,7 @@
         </div>
         <p>Revenue {{ dataAll[index].quarter[16] }}</p>
         <div class="reveneu">
-            <span>{{ dataAll[index].revenue[16].replace(",", ".") }}</span>
+            <span>{{ getRevenue(index) }}</span>
             <div class="growth">
                 <span :class="getLastGrowth(index) > 0 ? ['growth-green', 'arrow-green'] : ['growth-red', 'arrow-red']"
                     class="padding10">{{ getLastGrowth(index) }}</span>
@@ -46,15 +46,15 @@ export default {
         getLastGrowth(index) {
             let numberA = this.dataAll[index].revenue[16];
             let numberB = this.dataAll[index].revenue[15];
-            numberA = Number(numberA.replace(',', '.'));
-            numberB = Number(numberB.replace(',', '.'));
+            numberA = stockService.convertToBillionUSD(Number(numberA.replace(',', '')));
+            numberB = stockService.convertToBillionUSD(Number(numberB.replace(',', '')));
             return (numberA - numberB).toFixed(2)
         },
         getLastGrowthPercent(index) {
             let numberA = this.dataAll[index].revenue[16];
             let numberB = this.dataAll[index].revenue[15];
-            numberA = Number(numberA.replace(',', '.'));
-            numberB = Number(numberB.replace(',', '.'));
+            numberA = stockService.convertToBillionUSD(Number(numberA.replace(',', '')));
+            numberB = stockService.convertToBillionUSD(Number(numberB.replace(',', '')));
             let different = numberA - numberB;
             let percent = ((different / numberB) * 100).toFixed(2);
             return percent + " %";
@@ -63,6 +63,11 @@ export default {
             const fileName = this.dataAll[0].name.toLowerCase();
             return require(`@/assets/img/${fileName}.png`);
 
+        },
+        getRevenue(index) {
+            let number = Number(this.dataAll[index].revenue[16].replace(",", ""));
+            let billion = stockService.convertToBillionUSD(number);
+            return billion.toFixed(2)
         }
     }
 }

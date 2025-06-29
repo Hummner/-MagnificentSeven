@@ -1,5 +1,5 @@
 <template>
-    <canvas ref="horizontalChartCanvas"></canvas>
+    <canvas ref="horizontalBarChartsPercent"></canvas>
 </template>
 
 <script>
@@ -18,7 +18,7 @@ import { stockService } from '@/services/stockService';
 Chart.register(BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title);
 
 export default {
-    name: 'HorizontalBarCharts',
+    name: 'HorizontalBarChartsPercent',
     data() {
         return {
             dataAll: [],
@@ -28,7 +28,7 @@ export default {
         };
     },
     async mounted() {
-        this.ctx = this.$refs.horizontalChartCanvas.getContext('2d');
+        this.ctx = this.$refs.horizontalBarChartsPercent.getContext('2d');
         await this.loadData();
         this.prepareChartData();
         this.renderChart();
@@ -40,20 +40,20 @@ export default {
         },
         prepareChartData() {
             const combined = this.dataAll.map(company => {
-                let ttm = company.incomeNetto.slice(-4).map(i => Number(i.replace(",", "") / 1000));
-                let sum = ttm.reduce((a, b) => a + b, 0);
-                let newSum = Math.round(sum * 100) / 100;
+                let grossMargin = company.grossMargin[company.grossMargin.length - 1];
+                let number = Number(grossMargin.replace("%", ""))
+
                 return {
                     name: company.name,
-                    income: newSum
+                    grossMargin: number
                 };
             });
 
-            combined.sort((a, b) => b.income - a.income);
+            combined.sort((a, b) => b.grossMargin - a.grossMargin);
             this.labels = combined.map(c => c.name);
-            this.data = combined.map(c => c.income);
+            this.data = combined.map(c => c.grossMargin);
 
-            console.log("Prepared chart data:", this.data);
+            console.log("Percent chart data:", this.data);
         },
         renderChart() {
             const backgroundColors = ['#39DAFF', '#31BFE2', '#29A5C5', '#218AA8', '#196F8C', '#11546F', '#093A52'];
@@ -75,12 +75,12 @@ export default {
                         x: {
                             grid: {
                                 display: true,
-                                color: '#444',
+                                color: '#9E9E9E',
                                 borderDash: [4, 4],
                                 lineWidth: 1
                             },
                             ticks: {
-                                color: '#9E9E9E'
+                                color: '#fff'
                             }
                         },
                         y: {
@@ -99,10 +99,11 @@ export default {
                             color: '#fff',
                             anchor: 'end',
                             align: 'right',
+                            formatter: (value) => value + '%'
                         },
                         title: {
                             display: true,
-                            text: 'Net Income TTM',
+                            text: 'Gross Margin in % LQ',
                             color: '#fff',
                             textAlign: 'left',
                             align: 'start',

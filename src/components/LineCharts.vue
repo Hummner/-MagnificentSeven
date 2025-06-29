@@ -22,7 +22,7 @@ export default {
     name: 'LineChart',
     data() {
         return {
-            colors: ['#00ffff', '#00ccff', '#00aaff', '#0088ff', '#0066ff', '#0044ff', '#0022ff'],
+            colors: [],
             dataAll: []
         };
     },
@@ -30,10 +30,12 @@ export default {
         const ctx = this.$refs.chartCanvas.getContext('2d');
         this.dataAll = await stockService.renderData();
 
+        this.colors = ['#39DAFF', '#31BFE2', '#29A5C5', '#218AA8', '#196F8C', '#11546F', '#093A52'];
+
         const datasets = this.dataAll.map((company, i) => ({
             label: company.name,
             data: company.revenue
-                .slice(-13) // nur die letzten 13 Werte
+                .slice(-13)
                 .map(r => parseFloat(r.replace(',', ''))),
             borderColor: this.colors[i % this.colors.length],
             backgroundColor: 'transparent',
@@ -53,18 +55,21 @@ export default {
             options: {
                 responsive: false,
                 plugins: {
+                    datalabels: {
+                        display: false
+                    },
                     legend: {
                         position: 'right',
                         labels: {
                             color: '#fff'
-                        }
+                        },
                     },
                     title: {
                         display: true,
                         text: 'Revenue last 3 years',
                         color: '#fff',
                         textAlign: 'left',
-                        align: 'start', // = linksbündig
+                        align: 'start',
                         font: {
                             size: 24,
                             weight: 'bold'
@@ -79,14 +84,14 @@ export default {
                         ticks: {
                             color: '#ccc',
                             padding: 8,
-                            rotation: 45           // Drehen der Beschriftung
+                            rotation: 45
                         },
-                        grid: { color: '#444' },
+                        grid: { color: '#9E9E9E' },
 
                     },
                     y: {
                         ticks: { color: '#ccc' },
-                        grid: { color: '#444' },
+                        grid: { color: '#9E9E9E' },
                         beginAtZero: true
                     }
                 }

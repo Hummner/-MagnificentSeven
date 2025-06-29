@@ -30,11 +30,15 @@ export default {
         const latestIndex = this.dataAll[0].revenue.length - 1;
 
         const labels = this.dataAll.map(c => c.name);
-        const data = this.dataAll.map(c =>
-            parseFloat(c.revenue[latestIndex].replace(',', ''))
+        const data = this.dataAll.map(c => {
+            let number = Number(c.revenue[latestIndex].replace(',', '.'))
+            return number.toFixed(2)
+        }
+
+
         );
 
-        const backgroundColors = ['#00ffff', '#00ccff', '#00aaff', '#0088ff', '#0066ff', '#0044ff', '#0022ff']
+        const backgroundColors = ['#39DAFF', '#31BFE2', '#29A5C5', '#218AA8', '#196F8C', '#11546F', '#093A52'];
 
         new Chart(ctx, {
             type: 'doughnut',
@@ -51,6 +55,9 @@ export default {
             },
             options: {
                 plugins: {
+                    datalabels: {
+                        display: false
+                    },
                     title: {
                         display: true,
                         text: 'Revenue Breakdown Magnificent Seven',

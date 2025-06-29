@@ -31,6 +31,27 @@
       </BaseCard>
     </div>
 
+    <div>
+      <BaseCard>
+        <HorizontalBarCharts>
+
+        </HorizontalBarCharts>
+      </BaseCard>
+
+      <BaseCard>
+        <HorizontalBarChartsPercent>
+
+        </HorizontalBarChartsPercent>
+      </BaseCard>
+
+      <BaseCard>
+        <VerticalBarCharts>
+
+        </VerticalBarCharts>
+      </BaseCard>
+
+    </div>
+
 
   </main>
 
@@ -43,6 +64,9 @@ import BaseCard from './components/BaseCard.vue';
 import SmallCard from './components/SmallCard.vue';
 import LineCharts from './components/LineCharts.vue';
 import Doughnut from './components/Doughnut.vue';
+import HorizontalBarCharts from './components/HorizontalBarCharts.vue';
+import HorizontalBarChartsPercent from './components/HorizontalBarChartsPercent.vue';
+import VerticalBarCharts from './components/VerticalBarCharts.vue';
 
 
 export default {
@@ -51,7 +75,10 @@ export default {
     BaseCard,
     SmallCard,
     LineCharts,
-    Doughnut
+    Doughnut,
+    HorizontalBarCharts,
+    HorizontalBarChartsPercent,
+    VerticalBarCharts
   },
   data() {
     return {

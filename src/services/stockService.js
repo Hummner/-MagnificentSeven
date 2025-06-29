@@ -81,6 +81,12 @@ class StockService {
     return dataToJson;
 
   }
+
+  convertToBillionUSD(valueInThousands) {
+    const billion = valueInThousands / 1_000;
+    return billion
+  }
+
 }
 
 export const stockService = new StockService();
