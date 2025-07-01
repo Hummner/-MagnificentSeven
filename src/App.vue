@@ -31,7 +31,7 @@
       </BaseCard>
     </div>
 
-    <div>
+    <div class="bar-charts">
       <BaseCard>
         <HorizontalBarCharts>
 
@@ -106,6 +106,10 @@ body {
 
 }
 
+.bar-charts {
+  display: flex;
+}
+
 .middle-diagramms {
   display: flex;
   align-items: center;
@@ -125,6 +129,10 @@ header {
 
 main {
   padding: 96px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 64px;
 }
 
 .placeholder {
