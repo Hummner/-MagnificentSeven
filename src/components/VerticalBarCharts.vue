@@ -114,9 +114,8 @@ export default {
                 options: {
                     datasets: {
                         bar: {
-                            categoryPercentage: 1.0, // nimmt die ganze Kategoriebreite
-                            barPercentage: 1,      // nimmt die ganze Balkenbreite
-                            // alternativ:
+                            categoryPercentage: 1.0,
+                            barPercentage: 1,
                             barThickness: 20
                         }
                     },
