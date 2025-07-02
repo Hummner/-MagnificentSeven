@@ -19,7 +19,7 @@
     <div class="middle-diagramms">
 
       <BaseCard class="line-chart">
-        <LineCharts>
+        <LineCharts >
 
         </LineCharts>
       </BaseCard>
@@ -146,7 +146,7 @@ main {
 }
 
 .line-chart {
-  width: 50% !important;
+  flex: 1;
   height: 500px;
 }
 
