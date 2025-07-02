@@ -106,6 +106,7 @@ body {
 
 }
 
+
 .bar-charts {
   display: flex;
 }
@@ -113,6 +114,7 @@ body {
 .middle-diagramms {
   display: flex;
   align-items: center;
+  width: 100%;
 
 }
 
@@ -133,6 +135,7 @@ main {
   justify-content: center;
   flex-direction: column;
   gap: 64px;
+  max-width: 1920px;
 }
 
 .placeholder {
@@ -143,7 +146,8 @@ main {
 }
 
 .line-chart {
-  width: 500px;
+  width: 50% !important;
+  height: 500px;
 }
 
 h1 {
